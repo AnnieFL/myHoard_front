@@ -1,10 +1,22 @@
 import Header from "../../components/header";
 import { texts } from "./texts.js";
 import { Page, Content, SideBar, HomeTitle, MainContent, ExampleImage, ImagesRow, Image, ImageDesc } from "../../styled";
+import { useEffect, useState } from "react";
+import Server from "../../classes/api";
 
 export default function Home() {
   const login = false;
   const lang = "go";
+  const [topThree, setTopThree] = useState([]);
+
+  useEffect(() => {
+    if (!topThree[0]) {
+      (async () => {
+        console.log("A")
+        setTopThree(await Server.baseGet("user/top/3"));
+      })();
+    }
+  },[])
 
   return (
     <Page>
@@ -29,6 +41,15 @@ export default function Home() {
               </Image>
             </ImagesRow>
             <HomeTitle>{texts.show[lang]}</HomeTitle>
+            <ImagesRow>
+              {/*topThree.map((user) => (
+                <Image>
+                  <ExampleImage src={user.picture}/>
+                  <ImageDesc>{user.name} - {user.score} {texts.points[lang]}</ImageDesc>
+                </Image>
+              ))
+              */}
+            </ImagesRow>
             <HomeTitle>{texts.hoard[lang]}</HomeTitle>
           </MainContent>
         }

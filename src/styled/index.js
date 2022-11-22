@@ -9,13 +9,12 @@ export const Page = styled.div`
 `;
 
 export const Content = styled.div`
-    height: 88vh;
+    min-height: 88vh;
     display: flex;
     flex-direction: row;
 `;
 
 export const SideBar = styled.div`
-    height: 100%;
     width: 25%;
     margin-right: 20px;
     box-shadow: 0px 0px 10px black;
@@ -55,16 +54,24 @@ export const HomeTitle = styled.h1`
 `;
 
 export const ExampleImage = styled.img`
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
 `;
 
 export const ImagesRow = styled.div`
-    width: 100%;
+    width: 70%;
+    margin-left: 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: ${colors.letter};
+    padding: 20px;
+    border-radius: 50px;
+    @media(max-width: 900px) {
+        flex-direction: column;
+    }
 `;
 
 export const Image = styled.div`
@@ -74,4 +81,9 @@ export const Image = styled.div`
 
 export const ImageDesc = styled.div`
     font-size: 0.8em;
+    text-align: center;
+    color: ${colors.background};
+    @media(max-width: 900px) {
+        margin-bottom: 5px;
+    }
 `;

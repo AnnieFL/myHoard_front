@@ -7,3 +7,5 @@ export const colors = {
         color2: "#563B21"
     }
 };
+
+export const DB_URL = "A";
