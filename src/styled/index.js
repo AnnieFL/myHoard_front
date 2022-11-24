@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { colors } from "../config/constants";
+import { Link } from "react-router-dom";
 
 export const Page = styled.div`
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('images/background_image.jpg');
+    background-position:center top;
+    background-size: cover;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -87,3 +91,101 @@ export const ImageDesc = styled.div`
         margin-bottom: 5px;
     }
 `;
+
+export const NonLink = styled(Link)`
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        color: inherit;
+    }
+`;
+
+export const DemiLink = styled(Link)`
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        color: inherit;
+        text-decoration: underline;
+    }
+`;
+
+//Form
+export const FormMain = styled.div`
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+    
+export const FormContent = styled.form`
+    background-color: ${colors.item};
+    color: ${colors.letter};
+    min-width: 360px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;    
+    padding: 20px;
+`;
+
+export const Field = styled.div`
+    margin: 15px;
+    padding: 5px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;  
+`;
+
+export const Input = styled.input`
+    background-color: ${colors.item};
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid ${colors.letter};
+    font-size: 1.4em;
+    color: ${colors.letter};
+`;
+
+export const Select = styled.select`
+    background-color: ${colors.item};
+    border: none;
+    border-bottom: 1px solid ${colors.letter};
+    color: ${colors.letter};
+`;
+
+export const Option = styled.option`
+    background-color: ${colors.item};
+    border: none;
+    border-bottom: 1px solid ${colors.letter};
+    color: ${colors.letter};
+`;
+
+export const SubmitButton = styled.button`
+    border: 1px solid ${colors.letter};
+    border-radius: 5px;
+    background-color: ${colors.item};
+    color: ${colors.letter};
+    font-size: 1.2em;
+    padding: 3px 15px 3px 15px;
+    cursor: pointer;
+`;
+
+export const FormMessage = styled.span`
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.8em;
+    color: ${colors.letter};
+`;
+
+export const FormLink = styled(Link)`
+    color: inherit;
+    &:hover {
+        color: inherit;
+    }
+`;
+//

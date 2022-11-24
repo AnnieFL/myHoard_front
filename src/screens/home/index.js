@@ -1,6 +1,5 @@
 import Header from "../../components/header";
-import { texts } from "./texts.js";
-import { Page, Content, SideBar, HomeTitle, MainContent, ExampleImage, ImagesRow, Image, ImageDesc } from "../../styled";
+import { Page, Content, SideBar, HomeTitle, MainContent, ExampleImage, ImagesRow, Image, ImageDesc, DemiLink } from "../../styled";
 import { useEffect, useState } from "react";
 import Server from "../../classes/api";
 
@@ -12,7 +11,6 @@ export default function Home() {
   useEffect(() => {
     if (!topThree[0]) {
       (async () => {
-        console.log("A")
         setTopThree(await Server.baseGet("user/top/3"));
       })();
     }
@@ -22,25 +20,27 @@ export default function Home() {
     <Page>
       <Header />
       <Content>
-        <SideBar>AA</SideBar>
+        <SideBar>
+          <DemiLink to="/login">Login</DemiLink>
+        </SideBar>
         {!login &&
           <MainContent>
-            <HomeTitle>{texts.collect[lang]}</HomeTitle>
+            <HomeTitle>Collect things!</HomeTitle>
             <ImagesRow>
               <Image>
                 <ExampleImage src={"images/item1.png"} />
-                <ImageDesc>{texts.bottles[lang]}</ImageDesc>
+                <ImageDesc>Bottles!!</ImageDesc>
               </Image>
               <Image>
                 <ExampleImage src={"images/item2.png"} />
-                <ImageDesc>{texts.chairs[lang]}</ImageDesc>
+                <ImageDesc>Chairs!!</ImageDesc>
               </Image>
               <Image>
                 <ExampleImage src={"images/item3.png"} />
-                <ImageDesc>{texts.pipe[lang]}</ImageDesc>
+                <ImageDesc>This... thing!</ImageDesc>
               </Image>
             </ImagesRow>
-            <HomeTitle>{texts.show[lang]}</HomeTitle>
+            <HomeTitle>Show it off!</HomeTitle>
             <ImagesRow>
               {/*topThree.map((user) => (
                 <Image>
@@ -50,7 +50,7 @@ export default function Home() {
               ))
               */}
             </ImagesRow>
-            <HomeTitle>{texts.hoard[lang]}</HomeTitle>
+            <HomeTitle>And build... Your Hoard!</HomeTitle>
           </MainContent>
         }
         {login &&
