@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Server from "../../classes/server";
 import { useSelector } from "react-redux";
 import { selectLogin } from "../../store/reducer";
-import { DB_URL } from "../../config/constants";
+import env from "react-dotenv";
 
 export default function Home() {
   const login = useSelector(selectLogin);
@@ -15,19 +15,19 @@ export default function Home() {
     if (!topThree[0]) {
       (async () => {
         setTopThree(await Server.baseGet("user/top/3"));
-        console.log(DB_URL);
+        console.log(process.env);
       })();
     }
-  },[])
+  }, [])
 
   return (
     <Page>
       <Header />
-        {!login.id &&
-      <Content>
-        <SideBar>
-          <DemiLink to="/login">Login</DemiLink>
-        </SideBar>
+      {!login.id &&
+        <Content>
+          <SideBar>
+            <DemiLink to="/login">Login</DemiLink>
+          </SideBar>
           <MainContent>
             <HomeTitle>Collect things!</HomeTitle>
             <ImagesRow>
@@ -46,7 +46,7 @@ export default function Home() {
             </ImagesRow>
             <HomeTitle>Show them off!</HomeTitle>
             <ImagesRow>
-              {topThree.map((user, userKey) => (
+              {/*topThree.map((user, userKey) => (
                 <Image key={userKey}>
                   <ExampleImage src={user.picture}/>
                   <ImageDesc>{user.name} - {user.score ? user.score : 0} points</ImageDesc>
@@ -58,18 +58,18 @@ export default function Home() {
                   <ExampleImage src="images/loading.png" />
                   <ImageDesc>...</ImageDesc>
                 </Image>
-              ))}
+              ))*/}
             </ImagesRow>
             <HomeTitle>And build... Your Hoard!</HomeTitle>
           </MainContent>
-      </Content>
-        }
-        {login.id &&
+        </Content>
+      }
+      {login.id &&
         <Content>
           <SideBar></SideBar>
           <MainContent></MainContent>
         </Content>
-        }
+      }
     </Page>
   );
 }

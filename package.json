@@ -48,7 +48,8 @@
   },
   "react-dotenv": {
     "whitelist": [
-      "DB_URL"
+      "DB_URL",
+      "CI"
     ]
   }
 }
