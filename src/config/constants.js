@@ -10,4 +10,4 @@ export const colors = {
     }
 };
 
-export const DB_URL = env.DB_URL;
+export const DB_URL = "https://myhoardback-myhoard.up.railway.app";
