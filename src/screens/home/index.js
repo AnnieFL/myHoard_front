@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Server from "../../classes/server";
 import { useSelector } from "react-redux";
 import { selectLogin } from "../../store/reducer";
+import { DB_URL } from "../../config/constants";
 
 export default function Home() {
   const login = useSelector(selectLogin);
@@ -14,6 +15,7 @@ export default function Home() {
     if (!topThree[0]) {
       (async () => {
         setTopThree(await Server.baseGet("user/top/3"));
+        console.log(DB_URL);
       })();
     }
   },[])
