@@ -1,3 +1,5 @@
+import env from "react-dotenv";
+
 export const colors = {
     background: "#EAFEAA",
     item: "#271B0F",
@@ -8,4 +10,4 @@ export const colors = {
     }
 };
 
-export const DB_URL = "A";
+export const DB_URL = env.DB_URL;

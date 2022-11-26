@@ -50,6 +50,18 @@ export const NavbarTitle = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+`;
+
+export const UserNavbarIcon = styled.img`
+    border-radius: 100%;
+    border: 3px solid ${colors.itemGradient.color1};
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    right: 20px;
+    top: 0.5vh;
+    cursor: pointer;
 `;
 
 export const HomeTitle = styled.h1`
