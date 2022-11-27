@@ -29,6 +29,7 @@ export default function ProfileEdit(props) {
     const save = async (event) => {
         event.preventDefault();
 
+        console.log(login);
         const changedUser = await Server.basePut(`user/edit/${login.email}`, { name, picture: picture ? await Util.toBase64(picture) : "", password }, login.token);
         
         console.log(changedUser);
