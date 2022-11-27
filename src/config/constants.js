@@ -1,5 +1,3 @@
-import env from "react-dotenv";
-
 export const colors = {
     background: "#EAFEAA",
     item: "#271B0F",

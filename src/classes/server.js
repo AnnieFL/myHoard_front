@@ -34,7 +34,7 @@ export default class Server {
 
     static async basePut(url, body, token) {
         try {
-            const response = await api.post(url, {
+            const response = await api.put(url, {
                 ...body
             }, {
                 headers: {
@@ -50,7 +50,7 @@ export default class Server {
 
     static async baseDelete(url, token) {
         try {
-            const response = await api.post(url, {
+            const response = await api.delete(url, {
                 headers: {
                     Authorization: token
                 }

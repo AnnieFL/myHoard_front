@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Server from "../../classes/server";
+import Server from "../../classes/Server";
 import Form from "../../components/form";
 import Header from "../../components/header";
 import { Content, Page } from "../../styled";
@@ -31,7 +31,7 @@ export default function Login(props) {
 
     const loggedUser = await Server.basePost("user/login", { name: username, password });
 
-    dispatch(setLogin({ token: loggedUser.token, name: loggedUser.user.name, email: loggedUser.user.email, id: loggedUser.user.id, picture: loggedUser.user.picture }));
+    dispatch(setLogin({ token: loggedUser.token, name: loggedUser.user.name, email: loggedUser.user.email, id: loggedUser.user.id, picture: loggedUser.user.picture, admin: loggedUser.user.permissions.includes("ADMIN") ? true : false}));
 
     navigate("/")
   }
@@ -41,7 +41,7 @@ export default function Login(props) {
 
     const signedUser = await Server.basePost("/user/signin", { name: username, password, email });
 
-    dispatch(setLogin({ token: signedUser.token, name: signedUser.user.name, email: signedUser.user.email, id: signedUser.user.id, picture: signedUser.user.picture }));
+    dispatch(setLogin({ token: signedUser.token, name: signedUser.user.name, email: signedUser.user.email, id: signedUser.user.id, picture: signedUser.user.picture, admin: signedUser.user.permissions.includes("ADMIN") ? true : false }));
 
     navigate("/")
   }

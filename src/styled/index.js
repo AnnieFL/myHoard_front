@@ -29,7 +29,10 @@ export const SideBar = styled.div`
 `;
 
 export const MainContent = styled.div`
-    width: 75%
+    width: 75%;
+    @media(max-width: 500px) {
+        width: 100%;
+    }
 `;
 
 
@@ -121,6 +124,10 @@ export const DemiLink = styled(Link)`
     }
 `;
 
+export const IconLink = styled.sup`
+    font-size: 0.5em;
+`;
+
 //Form
 export const FormMain = styled.div`
 
@@ -130,7 +137,7 @@ export const FormMain = styled.div`
     justify-content: center;
     align-items: center;
 `;
-    
+
 export const FormContent = styled.form`
     background-color: ${colors.item};
     color: ${colors.letter};
@@ -165,15 +172,34 @@ export const Input = styled.input`
 export const Select = styled.select`
     background-color: ${colors.item};
     border: none;
+    width: 100%;
     border-bottom: 1px solid ${colors.letter};
+    font-size: 1.4em;
     color: ${colors.letter};
 `;
 
 export const Option = styled.option`
     background-color: ${colors.item};
     border: none;
+    width: 100%;
     border-bottom: 1px solid ${colors.letter};
     color: ${colors.letter};
+`;
+
+export const InputFile = styled.input`
+    display: none;
+`;
+
+export const LabelFile = styled.label`
+    padding: 20px 10px;
+    width: 200px;
+    border: 1px solid ${colors.letter};
+    border-radius: 15px;
+    color: ${colors.letter};
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
 `;
 
 export const SubmitButton = styled.button`
@@ -199,5 +225,54 @@ export const FormLink = styled(Link)`
     &:hover {
         color: inherit;
     }
+`;
+//
+
+//Profile
+export const ProfileMain = styled.div`
+    background: ${colors.item};
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-top: 20px;
+    @media(min-width: 500px) {
+        margin-right: 20px;
+    }
+`;
+
+export const ProfileInfo = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+export const ProfileInfoPicture = styled.img`
+    width: 90px;
+    height: 90px;
+    border: 3px solid ${props => props.points < 100 ? "black" : props.points < 200 ? "brown" : props.points < 300 ? "grey" : "gold"};
+    border-radius: 10px;
+    margin-right: 10px;
+`;
+
+export const ProfileInfoName = styled.h1`
+    color: ${colors.letter};
+`;
+
+export const ProfileInfoTitle = styled.sub`
+    color: ${colors.letter};
+    font-size: 0.5em;
+`;
+
+export const ProfileInfoItems = styled.h2`
+    color: ${colors.letter};
+`;
+
+export const ProfileCategories = styled.div`
+`;
+
+export const ProfileCategoriesTitle = styled.h1`
+    width: 100%;
+    text-align: center;
+    color: ${colors.letter};
 `;
 //

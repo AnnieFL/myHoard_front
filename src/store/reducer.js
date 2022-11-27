@@ -8,7 +8,9 @@ export const Reducer = createSlice({
             name: "",
             id: 0,
             email: "",
-            picture: ""
+            picture: "",
+            permissions: [],
+            admin: false
         }
     },
     reducers: {
@@ -18,6 +20,9 @@ export const Reducer = createSlice({
             state.login.id = action.payload.id;
             state.login.email = action.payload.email;
             state.login.picture = action.payload.picture;
+            state.login.permissions = action.payload.permissions;
+                state.login.admin = action.payload.admin;
+
         },
         setLogout: (state) => {
             state.login.token = "";
@@ -25,6 +30,8 @@ export const Reducer = createSlice({
             state.login.id = 0;
             state.login.email = "";
             state.login.picture = "";
+            state.login.permissions = [];
+            state.login.admin = false;
         }
     }
 })
