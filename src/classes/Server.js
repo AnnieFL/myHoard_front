@@ -13,6 +13,7 @@ export default class Server {
             return response.data;
         } catch (err) {
             console.log(err);
+            return [];
         }
     }
 
@@ -29,6 +30,7 @@ export default class Server {
             return response.data;
         } catch (err) {
             console.log(err);
+            return [];
         }
     }
 
@@ -45,6 +47,7 @@ export default class Server {
             return response.data;
         } catch (err) {
             console.log(err)
+            return [];
         }
     }
 
@@ -59,6 +62,7 @@ export default class Server {
             return response.data;
         } catch (err) {
             console.log(err);
+            return [];
         }
     }
 }

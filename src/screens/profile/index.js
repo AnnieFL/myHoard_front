@@ -1,5 +1,5 @@
 import Header from "../../components/header";
-import { Page, Content, SideBar, MainContent, ProfileMain, ProfileInfo, ProfileInfoPicture, ProfileInfoName, ProfileInfoItems, DemiLink, IconLink, ProfileInfoTitle, ProfileCategoriesTitle, ProfileCategories } from "../../styled";
+import { Page, Content, SideBar, MainContent, ProfileMain, ProfileInfo, ProfileInfoPicture, ProfileInfoName, ProfileInfoItems, DemiLink, IconLink, ProfileInfoTitle, ProfileCategoriesTitle, ProfileCategories, ProfileCategoriesRow, ProfileCategoriesItem, ProfileCategoriesItemImage, NonLink } from "../../styled";
 import { useEffect, useState } from "react";
 import Server from "../../classes/Server";
 import { useSelector } from "react-redux";
@@ -12,6 +12,18 @@ export default function Profile() {
   const [things, setThings] = useState(0);
   const [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    if (!points && !things && !categories[0]) {
+      (async () => {
+        const info = await Server.baseGet(`user/info/${login.id}`, login.token)
+
+        setPoints(info.score);
+        setThings(info.things);
+        setCategories(info.categories);
+      })()
+    }
+  }, [])
+
   return (
     <Page>
       <Header />
@@ -23,7 +35,7 @@ export default function Profile() {
         <MainContent>
           <ProfileMain>
             <ProfileInfo>
-              <ProfileInfoPicture points={0} src={login.picture} />
+              <ProfileInfoPicture points={points} src={login.picture} />
               <ProfileInfoName> - {login.name}<ProfileInfoTitle>{login.admin ? "[admin]" : ""}</ProfileInfoTitle> ({points} points)<IconLink><DemiLink to={"/profile/edit"}>🖊️</DemiLink></IconLink></ProfileInfoName>
             </ProfileInfo>
 
@@ -35,12 +47,18 @@ export default function Profile() {
 
           <ProfileCategories>
             <ProfileCategoriesTitle>Categories</ProfileCategoriesTitle>
-            {categories[0] && categories.map((category) => (
-              <ProfileInfoItems>{category.name}</ProfileInfoItems>
-            ))}
-            {!categories[0] &&
-              <ProfileCategoriesTitle>---<DemiLink to={"/addthing"}>You have nothing, why don't you show us something you own?---</DemiLink></ProfileCategoriesTitle>
-            }
+            <ProfileCategoriesRow>
+              {categories[0] && categories.map((category) => (
+                <ProfileCategoriesItem rarity={category.rarity}>
+                  <ProfileCategoriesItemImage src={category.pictureUnlocked}/>
+                </ProfileCategoriesItem>
+              ))}
+              <NonLink to={"/addThing"}>
+              <ProfileCategoriesItem>
+                  <ProfileCategoriesItemImage src={"/images/plusSign.png"} />
+                </ProfileCategoriesItem>
+              </NonLink>
+            </ProfileCategoriesRow>
           </ProfileCategories>
         </MainContent>
       </Content>

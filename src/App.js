@@ -5,8 +5,10 @@ import Home from './screens/home';
 import Login from './screens/login';
 import Profile from './screens/profile';
 
-import AddCategory from './admin/screens/addCategory';
 import ProfileEdit from './screens/profileEdit';
+
+import AddCategory from './admin/screens/addCategory';
+import AddThing from './screens/addThing';
 
 export default function App() {
   return (
@@ -15,6 +17,8 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />
+
+      <Route path="/addThing" element={<AddThing />} />
 
       <Route path="/admin/addCategory" element={<AddCategory />} />
     </Routes>

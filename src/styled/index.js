@@ -228,6 +228,52 @@ export const FormLink = styled(Link)`
 `;
 //
 
+
+//Home
+export const HomePost = styled.div`
+    width: 100%;
+    background-image: linear-gradient(${colors.itemGradient.color1}, ${colors.itemGradient.color2});
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border-radius: 15px;
+`;
+
+export const PostHeader = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+export const PostProfilePicture = styled.img`
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    margin-right: 10px;
+`;
+
+export const PostTitle = styled.h2`
+    color: ${colors.letter};
+`;
+
+export const PostContent = styled.div`
+    width: 100%; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 20px;
+`;
+
+export const PostImage = styled.img`
+    height: 500px; 
+    width: 500px; 
+    @media(max-width:800px) {
+        height: 300px;
+        width: 300px;
+    }
+`;
+//
+
 //Profile
 export const ProfileMain = styled.div`
     background: ${colors.item};
@@ -274,5 +320,35 @@ export const ProfileCategoriesTitle = styled.h1`
     width: 100%;
     text-align: center;
     color: ${colors.letter};
+`;
+
+export const ProfileCategoriesRow = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+`;
+
+export const ProfileCategoriesItem = styled.div`
+    height: 150px;
+    width: 150px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.itemGradient.color1};
+    color: ${colors.letter};
+    border: 2px solid ${colors.letter};
+    font-size: 2em;
+    border-radius: 15px;
+    cursor: pointer;
+    &:hover{
+        background-color: ${colors.itemGradient.color2};
+    }
+`;
+
+export const ProfileCategoriesItemImage = styled.img`
+    height: 125px;
+    width: 125px;
 `;
 //

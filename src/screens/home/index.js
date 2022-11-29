@@ -1,6 +1,6 @@
 import Header from "../../components/header";
 import IntroPage from "../../components/introPage/introPage";
-import { Page, Content, SideBar, MainContent } from "../../styled";
+import { Page, Content, SideBar, MainContent, HomePost, PostHeader, PostProfilePicture, PostTitle, PostContent, PostImage } from "../../styled";
 import { useEffect, useState } from "react";
 import Server from "../../classes/Server";
 import { useSelector } from "react-redux";
@@ -15,6 +15,7 @@ export default function Home() {
     if (!latestThings[0] && login.id) {
       (async () => {
         setLatestThings(await Server.baseGet("thing/latest", login.token));
+        console.log(latestThings);
       })();
     }
   }, [])
@@ -23,7 +24,7 @@ export default function Home() {
     const currentThings = latestThings;
     const newThings = await Server.baseGet(`thing/latest?offset=${offset}`);
 
-    setLatestThings([... currentThings, ... newThings]);
+    setLatestThings([...currentThings, ...newThings]);
     setOffset(offset + 15);
   }
 
@@ -31,19 +32,24 @@ export default function Home() {
     <Page>
       <Header />
       {!login.id &&
-        <IntroPage/>
+        <IntroPage />
       }
       {login.id &&
         <Content>
           <SideBar></SideBar>
           <MainContent>
-            {latestThings.map((thing) => (
-              <div>
-                <span>{thing.name}</span>
-                <div>
-                  <img src={thing.picture}/>
-                </div>
-              </div>
+            {latestThings.map((thing, thingIndex) => (
+              <HomePost key={thingIndex}>
+                <PostHeader>
+                  <PostProfilePicture src={thing.user.picture} />
+                  <PostTitle>{thing.user.name} added: {thing.name}</PostTitle>
+                </PostHeader>
+                <PostContent>
+                  <PostImage src={thing.picture} title={`size: ${thing.size}m\nage: ${thing.age} months`} />
+                </PostContent>
+                <span style={{ color: "white" }}>{thing.category.name}</span>
+                <div>report</div>
+              </HomePost>
             ))}
           </MainContent>
         </Content>
