@@ -8,10 +8,12 @@ import { Content, Page } from "../../styled";
 import { useSelector } from "react-redux";
 import { selectLogin } from "../../store/reducer";
 import Util from "../../classes/Util";
+import Loading from "../../components/loading";
 
 export default function AddThing(props) {
   const login = useSelector(selectLogin);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [name, setName] = useState("");
   const [size, setSize] = useState("");
@@ -19,48 +21,61 @@ export default function AddThing(props) {
   const [category, setCategory] = useState(0);
   const [categoriesOptions, setCategoriesOptions] = useState([]);
   const [picture, setPicture] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!category[0]) {
       (async () => {
         const categories = await Server.baseGet(`category/list`, login.token);
-        categories.unshift({name: "", value: 0});
-        
-        setCategoriesOptions(categories.map((category) => ({label: category.name, value: category.id})));
+        categories.unshift({ name: "", value: 0 });
+
+        setCategoriesOptions(categories.map((category) => ({ label: category.name, value: category.id })));
+        setLoading(false);
       })();
     }
 
-    if (!login.admin) {
+    if (!login.id) {
       navigate("/");
+    }
+
+    if (location.state && location.state.category) {
+      setCategory(location.state.category)
     }
   }, [])
 
   const save = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
-    const created = await Server.basePost(`thing/create`, { name, picture: await Util.toBase64(picture), size, age, categoryId: category }, login.token)
-    console.log(created);
+    await Server.basePost(`thing/create`, { name, picture: await Util.toBase64(picture), size, age, categoryId: category }, login.token)
+
+    navigate(-1);
   }
 
   return (
     <Page>
       <Header />
       <Content>
-        <Form
-          fields={
-            [
-              { type: "text", value: name, onChange: (value) => setName(value), placeholder: "Name" },
-              { type: "number", value: size, onChange: (value) => setSize(value), placeholder: "Size (metric)" },
-              { type: "number", value: age, onChange: (value) => setAge(value), placeholder: "Age (in months)" },
-              { type: "select", value: category, options: categoriesOptions, onChange: (value) => setCategory(value), placeholder: "Category" },
-              { type: "file", accept: "image/png, image/jpeg", onChange: (files) => setPicture(files), placeholder: "Proof in picture" }
-            ]
-          }
-          onSubmit={
-            (event) => save(event)
-          }
-          buttonLabel="Add"
-        />
+        {loading &&
+          <Loading />
+        }
+        {!loading &&
+          <Form
+            fields={
+              [
+                { type: "text", value: name, onChange: (value) => setName(value), placeholder: "Name" },
+                { type: "number", value: size, onChange: (value) => setSize(value), placeholder: "Size (metric)" },
+                { type: "date", value: age, onChange: (value) => setAge(value), placeholder: "Age (in months)" },
+                { type: "select", value: category, options: categoriesOptions, onChange: (value) => setCategory(value), placeholder: "Category" },
+                { type: "file", accept: "image/png, image/jpeg", onChange: (files) => setPicture(files), placeholder: "Proof in picture" }
+              ]
+            }
+            onSubmit={
+              (event) => save(event)
+            }
+            buttonLabel="Add"
+          />
+        }
       </Content>
     </Page >
   );

@@ -9,6 +9,10 @@ import ProfileEdit from './screens/profileEdit';
 
 import AddCategory from './admin/screens/addCategory';
 import AddThing from './screens/addThing';
+import Thing from './screens/thing';
+import Category from './screens/category';
+import Categories from './screens/categories';
+import YourHoard from './screens/yourHoard';
 
 export default function App() {
   return (
@@ -17,6 +21,11 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/yourHoard" element={<YourHoard />} />
+
+      <Route path="/thing/:id" element={<Thing />} />
+      <Route path="/category/:id" element={<Category />} />
 
       <Route path="/addThing" element={<AddThing />} />
 

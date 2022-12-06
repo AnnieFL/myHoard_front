@@ -1,21 +1,29 @@
 import Header from "../../components/header";
 import IntroPage from "../../components/introPage/introPage";
-import { Page, Content, SideBar, MainContent, HomePost, PostHeader, PostProfilePicture, PostTitle, PostContent, PostImage } from "../../styled";
+import { Page, Content, SideBar, MainContent, HomePost, PostHeader, PostProfilePicture, PostTitle, PostContent, PostImage, PostReport, DemiLink } from "../../styled";
 import { useEffect, useState } from "react";
 import Server from "../../classes/Server";
+import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 import { selectLogin } from "../../store/reducer";
+import { colors } from "../../config/constants";
+import Sidenav from "../../components/sidebar";
+import Loading from "../../components/loading";
 
 export default function Home() {
   const login = useSelector(selectLogin);
+
   const [offset, setOffset] = useState(15);
   const [latestThings, setLatestThings] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const currentTime = dayjs();
 
   useEffect(() => {
     if (!latestThings[0] && login.id) {
       (async () => {
         setLatestThings(await Server.baseGet("thing/latest", login.token));
-        console.log(latestThings);
+        setLoading(false);
       })();
     }
   }, [])
@@ -36,19 +44,23 @@ export default function Home() {
       }
       {login.id &&
         <Content>
-          <SideBar></SideBar>
+          <Sidenav />
           <MainContent>
-            {latestThings.map((thing, thingIndex) => (
+            {loading &&
+              <Loading />
+            }
+            {!loading && latestThings.map((thing, thingIndex) => (
               <HomePost key={thingIndex}>
                 <PostHeader>
                   <PostProfilePicture src={thing.user.picture} />
-                  <PostTitle>{thing.user.name} added: {thing.name}</PostTitle>
+                  <PostTitle>
+                    <DemiLink to={`/profile${thing.user.id == login.id ? "" : `/${thing.user.id}`}`}>{thing.user.name}</DemiLink> added: <DemiLink to={`/thing/${thing.id}`}>{thing.name}</DemiLink> into <DemiLink to={`/category/${thing.category.id}`}>{thing.category.name}</DemiLink>
+                  </PostTitle>
+                  <PostReport color={colors.letter}><DemiLink>🏳️</DemiLink></PostReport>
                 </PostHeader>
                 <PostContent>
-                  <PostImage src={thing.picture} title={`size: ${thing.size}m\nage: ${thing.age} months`} />
+                  <PostImage src={thing.picture} title={`${!!thing.size ? `size: ${thing.size}m\n` : ""}${!!thing.age ? `age : ${currentTime.diff(thing.age, 'month')} months` : ""}`} />
                 </PostContent>
-                <span style={{ color: "white" }}>{thing.category.name}</span>
-                <div>report</div>
               </HomePost>
             ))}
           </MainContent>

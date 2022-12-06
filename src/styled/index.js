@@ -3,7 +3,7 @@ import { colors } from "../config/constants";
 import { Link } from "react-router-dom";
 
 export const Page = styled.div`
-    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('images/background_image.jpg');
+    background: url('/images/background_image.jpg'), linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) );
     background-position:center top;
     background-size: cover;
     min-height: 100vh;
@@ -19,7 +19,8 @@ export const Content = styled.div`
 `;
 
 export const SideBar = styled.div`
-    width: 25%;
+    width: 20%;
+    min-width: 200px;
     margin-right: 20px;
     box-shadow: 0px 0px 10px black;
     background-color: ${colors.background};
@@ -65,6 +66,21 @@ export const UserNavbarIcon = styled.img`
     right: 20px;
     top: 0.5vh;
     cursor: pointer;
+    @media(max-width: 500px) {
+        display: none;
+    }
+`;
+
+export const NavbarReturnArrow = styled.img`
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 20px;
+    top: 0.5vh;
+    cursor: pointer;
+    @media(max-width: 500px) {
+        display: none;
+    }
 `;
 
 export const HomeTitle = styled.h1`
@@ -202,6 +218,12 @@ export const LabelFile = styled.label`
     cursor: pointer;
 `;
 
+export const LabelDate = styled.label`
+    font-size: 0.9em;
+    width: 100%;
+    text-decoration: underline;
+`;
+
 export const SubmitButton = styled.button`
     border: 1px solid ${colors.letter};
     border-radius: 5px;
@@ -242,6 +264,7 @@ export const PostHeader = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
+    margin-left: 10px;
     align-items: center;
 `;
 
@@ -272,10 +295,27 @@ export const PostImage = styled.img`
         width: 300px;
     }
 `;
+
+export const PostReport = styled.div`
+    color: ${props => props.color ? props.color : "black"};
+    margin-left: auto; 
+    margin-right: 25px;
+`;
+
+export const PostFooter = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+`;
+
+export const PostInfo = styled.span`
+    color: ${colors.letter};
+    font-weight: bold;
+    font-size: 1.3em;
+`;
 //
 
-//Profile
-export const ProfileMain = styled.div`
+export const ContentMain = styled.div`
     background: ${colors.item};
     border-radius: 15px;
     display: flex;
@@ -287,6 +327,7 @@ export const ProfileMain = styled.div`
     }
 `;
 
+//Profile
 export const ProfileInfo = styled.div`
     display: flex;
     flex-direction: row;
@@ -295,7 +336,7 @@ export const ProfileInfo = styled.div`
 export const ProfileInfoPicture = styled.img`
     width: 90px;
     height: 90px;
-    border: 3px solid ${props => props.points < 100 ? "black" : props.points < 200 ? "brown" : props.points < 300 ? "grey" : "gold"};
+    border: 3px solid ${props => props.points < 100 ? "black" : props.points < 200 ? "#cd7f32" : props.points < 300 ? "#c0c0c0" : "gold"};
     border-radius: 10px;
     margin-right: 10px;
 `;
@@ -326,9 +367,96 @@ export const ProfileCategoriesRow = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 `;
 
 export const ProfileCategoriesItem = styled.div`
+    height: 150px;
+    width: 150px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.itemGradient.color1};
+    color: ${colors.letter};
+    border: 3px solid ${props => props.rarity < 1 ? "black" : props.points < 2 ? "#cd7f32" : props.points < 3 ? "#c0c0c0" : props.points < 4 ? "gold" : ""};
+    ${props => props.rarity == 4 ?
+        `border-top: 3px solid cyan;
+         border-left: 3px solid red;
+         border-bottom: 3px solid gold;
+         border-right: 3px solid green;`
+    : ""};
+    font-size: 2em;
+    border-radius: 15px;
+    cursor: pointer;
+    &:hover{
+        background-color: ${colors.itemGradient.color2};
+    }
+`;
+
+export const ProfileCategoriesItemImage = styled.img`
+    height: 125px;
+    width: 125px;
+    ${props => props.owned === 0 ?
+        `filter: brightness(0%);`
+        : ""}
+`;
+//
+
+//Category
+export const CategoryInfo = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+export const CategoryInfoPicture = styled.img`
+    width: 90px;
+    height: 90px;
+    border: 3px solid ${props => props.rarity < 1 ? "black" : props.points < 2 ? "#cd7f32" : props.points < 3 ? "#c0c0c0" : props.points < 4 ? "gold" : ""};
+    ${props => props.rarity == 4 ?
+        `border-top: 3px solid cyan;
+         border-left: 3px solid red;
+         border-bottom: 3px solid gold;
+         border-right: 3px solid green;`
+        : ""};
+    ${props => props.owned === 0 ?
+        `filter: brightness(0%);`
+        : ""}
+    border-radius: 10px;
+    margin-right: 10px;
+`;
+
+export const CategoryInfoName = styled.h1`
+    color: ${colors.letter};
+`;
+
+export const CategoryInfoTitle = styled.sub`
+    color: ${colors.letter};
+    font-size: 0.5em;
+`;
+
+export const CategoryInfoItems = styled.h2`
+    color: ${colors.letter};
+`;
+
+export const CategoryThings = styled.div`
+`;
+
+export const CategoryThingsTitle = styled.h1`
+    width: 100%;
+    text-align: center;
+    color: ${colors.letter};
+`;
+
+export const CategoryThingsRow = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;
+
+export const CategoryThingsItem = styled.div`
     height: 150px;
     width: 150px;
     margin-left: 10px;
@@ -347,8 +475,10 @@ export const ProfileCategoriesItem = styled.div`
     }
 `;
 
-export const ProfileCategoriesItemImage = styled.img`
+export const CategoryThingsImage = styled.img`
     height: 125px;
     width: 125px;
+    border-radius: 25px;
 `;
 //
+

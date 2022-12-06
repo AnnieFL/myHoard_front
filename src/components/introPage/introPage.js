@@ -1,6 +1,7 @@
 import { Content, SideBar, HomeTitle, MainContent, ExampleImage, ImagesRow, Image, ImageDesc, DemiLink } from "../../styled";
 import { useEffect, useState } from "react";
 import Server from "../../classes/Server";
+import Sidenav from "../sidebar";
 
 export default function IntroPage() {
     const [topThree, setTopThree] = useState([]);
@@ -16,9 +17,8 @@ export default function IntroPage() {
 
     return (
         <Content>
-            <SideBar>
-                <DemiLink to="/login">Login</DemiLink>
-            </SideBar>
+            <Sidenav/>
+        
             <MainContent>
                 <HomeTitle>Collect things!</HomeTitle>
                 <ImagesRow>

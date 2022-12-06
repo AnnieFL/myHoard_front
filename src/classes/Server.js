@@ -8,7 +8,6 @@ export default class Server {
                     Authorization: token
                 }
             });
-            console.log(response);
 
             return response.data;
         } catch (err) {

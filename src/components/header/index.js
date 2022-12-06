@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectLogin } from "../../store/reducer";
-import { Navbar, NavbarTitle, UserNavbarIcon } from "../../styled";
+import { Navbar, NavbarReturnArrow, NavbarTitle, UserNavbarIcon } from "../../styled";
 
 export default function Header() {
     const login = useSelector(selectLogin);
@@ -13,6 +13,7 @@ export default function Header() {
             {!!login.id &&
                 <UserNavbarIcon src={login.picture} onClick={() => navigate("/profile")}/>
             }
+            <NavbarReturnArrow onClick={() => navigate(-1)} src={"/images/backArrow.png"}/>
         </Navbar>
     )
 }

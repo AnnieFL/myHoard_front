@@ -7,6 +7,7 @@ import { Content, Page } from "../../styled";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectLogin, setLogin } from "../../store/reducer";
+import Loading from "../../components/loading";
 
 export default function Login(props) {
   const location = useLocation()
@@ -19,6 +20,7 @@ export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (loginInfo.id) {
@@ -28,16 +30,18 @@ export default function Login(props) {
 
   const login = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const loggedUser = await Server.basePost("user/login", { name: username, password });
 
-    dispatch(setLogin({ token: loggedUser.token, name: loggedUser.user.name, email: loggedUser.user.email, id: loggedUser.user.id, picture: loggedUser.user.picture, admin: loggedUser.user.permissions.includes("ADMIN") ? true : false}));
+    dispatch(setLogin({ token: loggedUser.token, name: loggedUser.user.name, email: loggedUser.user.email, id: loggedUser.user.id, picture: loggedUser.user.picture, admin: loggedUser.user.permissions.includes("ADMIN") ? true : false }));
 
     navigate("/")
   }
 
   const signin = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const signedUser = await Server.basePost("/user/signin", { name: username, password, email });
 
@@ -50,35 +54,42 @@ export default function Login(props) {
     <Page>
       <Header />
       <Content>
-        {!signup &&
-          <Form
-            fields={
-              [
-                { type: "text", value: username, onChange: (value) => setUsername(value), placeholder: "username" },
-                { type: "password", value: password, onChange: (value) => setPassword(value), placeholder: "password" }
-              ]
-            }
-            onSubmit={
-              (event) => login(event)
-            }
-            buttonLabel="Login"
-            login={true}
-          />}
-        {signup &&
-          <Form
-            fields={
-              [
-                { type: "text", value: username, onChange: (value) => setUsername(value), placeholder: "username" },
-                { type: "email", value: email, onChange: (value) => setEmail(value), placeholder: "email" },
-                { type: "password", value: password, onChange: (value) => setPassword(value), placeholder: "password" }
-              ]
-            }
-            onSubmit={
-              (event) => signin(event)
-            }
-            buttonLabel="Sign up"
-            signup={true}
-          />}
+        {loading &&
+          <Loading />
+        }
+        {!loading &&
+          <>
+            {!signup &&
+              <Form
+                fields={
+                  [
+                    { type: "text", value: username, onChange: (value) => setUsername(value), placeholder: "username" },
+                    { type: "password", value: password, onChange: (value) => setPassword(value), placeholder: "password" }
+                  ]
+                }
+                onSubmit={
+                  (event) => login(event)
+                }
+                buttonLabel="Login"
+                login={true}
+              />}
+            {signup &&
+              <Form
+                fields={
+                  [
+                    { type: "text", value: username, onChange: (value) => setUsername(value), placeholder: "username" },
+                    { type: "email", value: email, onChange: (value) => setEmail(value), placeholder: "email" },
+                    { type: "password", value: password, onChange: (value) => setPassword(value), placeholder: "password" }
+                  ]
+                }
+                onSubmit={
+                  (event) => signin(event)
+                }
+                buttonLabel="Sign up"
+                signup={true}
+              />}
+          </>
+        }
       </Content>
     </Page >
   );
