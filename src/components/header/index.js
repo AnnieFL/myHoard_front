@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { selectLogin } from "../../store/reducer";
 import { Navbar, NavbarReturnArrow, NavbarTitle, UserNavbarIcon } from "../../styled";
 
-export default function Header() {
+export default function Header(props) {
     const login = useSelector(selectLogin);
     const navigate = useNavigate();
 
     return (
         <Navbar>
             <NavbarTitle onClick={() => navigate("/")}>My Hoard</NavbarTitle>
-            {!!login.id &&
+            {(!!login.id && !props.profile) &&
                 <UserNavbarIcon src={login.picture} onClick={() => navigate("/profile")}/>
             }
             <NavbarReturnArrow onClick={() => navigate(-1)} src={"/images/backArrow.png"}/>

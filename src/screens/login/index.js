@@ -34,6 +34,12 @@ export default function Login(props) {
 
     const loggedUser = await Server.basePost("user/login", { name: username, password });
 
+    if (loggedUser.error) {
+      alert(loggedUser.error.msg);
+
+      return setLoading(false);
+    }
+
     dispatch(setLogin({ token: loggedUser.token, name: loggedUser.user.name, email: loggedUser.user.email, id: loggedUser.user.id, picture: loggedUser.user.picture, admin: loggedUser.user.permissions.includes("ADMIN") ? true : false }));
 
     navigate("/")
@@ -44,6 +50,11 @@ export default function Login(props) {
     setLoading(true);
 
     const signedUser = await Server.basePost("/user/signin", { name: username, password, email });
+
+    if (signedUser.error) {
+      alert(signedUser.error.msg);
+      return setLoading(false);
+    }
 
     dispatch(setLogin({ token: signedUser.token, name: signedUser.user.name, email: signedUser.user.email, id: signedUser.user.id, picture: signedUser.user.picture, admin: signedUser.user.permissions.includes("ADMIN") ? true : false }));
 

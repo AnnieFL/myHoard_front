@@ -12,6 +12,7 @@ export default function Sidenav() {
             <>
             <ul>
                 <li><DemiLink to={"/yourHoard"}>Your Hoard</DemiLink></li>
+                <li><DemiLink to={"/gob"}>The Gob</DemiLink></li>
                 <li><DemiLink to={"/categories"}>Categories</DemiLink></li>
                 <li><DemiLink onClick={() => dispatch(setLogout())}>Logout</DemiLink></li>
                 {!login.admin &&

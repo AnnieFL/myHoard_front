@@ -482,3 +482,62 @@ export const CategoryThingsImage = styled.img`
 `;
 //
 
+//Gob
+export const ListUsers = styled.div`
+`;
+
+export const ListUsersTitle = styled.h1`
+    width: 100%;
+    text-align: center;
+    color: ${colors.letter};
+`;
+
+export const ListUsersRow = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;
+
+export const ListUsersItem = styled.div`
+    height: 150px;
+    width: 150px;
+    margin-left: 10px;
+    margin-bottom: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.itemGradient.color1};
+    color: ${colors.letter};
+    font-size: 2em;
+    border-radius: 100%;
+    cursor: pointer;
+    &:hover{
+        background-color: ${colors.itemGradient.color2};
+    }
+`;
+
+export const ListUsersCrown = styled.img`
+    height: 125px;
+    width: 125px;
+    position: absolute;
+    margin-bottom:150px;
+`;
+
+export const ListUsersPicture = styled.img`
+    height: 125px;
+    width: 125px;
+    border-radius: 100%;
+`;
+
+export const ListUsersName = styled.span`
+    position: absolute;
+    margin-top: 160px;
+    padding: 3px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    font-size: 0.9em;
+    color: ${colors.background};
+`;
+//

@@ -35,6 +35,11 @@ export default function ProfileEdit(props) {
 
         const changedUser = await Server.basePut(`user/edit/${login.id}`, { name, picture: picture ? await Util.toBase64(picture) : "", password }, login.token);
 
+        if (changedUser.error) {
+            alert(changedUser.error.msg);
+            await setLoading(false);
+        }
+
         dispatch(setLogin({ token: changedUser.token, name: changedUser.user.name, email: changedUser.user.email, id: changedUser.user.id, picture: changedUser.user.picture, admin: changedUser.user.permissions.includes("ADMIN") ? true : false }))
 
         navigate(-1);

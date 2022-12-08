@@ -47,7 +47,12 @@ export default function AddThing(props) {
     event.preventDefault();
     setLoading(true);
 
-    await Server.basePost(`thing/create`, { name, picture: await Util.toBase64(picture), size, age, categoryId: category }, login.token)
+    const created = await Server.basePost(`thing/create`, { name, picture: await Util.toBase64(picture), size, age, categoryId: category }, login.token)
+    
+    if (created.error) {
+      alert(created.error.msg);
+      return setLoading(false);
+    }
 
     navigate(-1);
   }

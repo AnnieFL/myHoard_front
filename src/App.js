@@ -13,6 +13,7 @@ import Thing from './screens/thing';
 import Category from './screens/category';
 import Categories from './screens/categories';
 import YourHoard from './screens/yourHoard';
+import Gob from './screens/gob';
 
 export default function App() {
   return (
@@ -20,9 +21,11 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/profile/:id" element={<Profile />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/categories" element={<Categories />} />
       <Route path="/yourHoard" element={<YourHoard />} />
+      <Route path="/gob" element={<Gob />} />
 
       <Route path="/thing/:id" element={<Thing />} />
       <Route path="/category/:id" element={<Category />} />

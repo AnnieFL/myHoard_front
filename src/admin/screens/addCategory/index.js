@@ -38,7 +38,12 @@ export default function AddCategory(props) {
     event.preventDefault();
     setLoading(true);
 
-    await Server.basePost(`category/create`, { name, picture: await Util.toBase64(picture), rarity, points }, login.token)
+    const created = await Server.basePost(`category/create`, { name, picture: await Util.toBase64(picture), rarity, points }, login.token)
+
+    if (created.error) {
+      alert(created.error.msg);
+      return setLoading(false);
+    }
 
     navigate(-1);
   }
