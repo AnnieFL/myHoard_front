@@ -413,8 +413,8 @@ export const CategoryInfo = styled.div`
 export const CategoryInfoPicture = styled.img`
     width: 90px;
     height: 90px;
-    border: 3px solid ${props => props.rarity < 1 ? "black" : props.points < 2 ? "#cd7f32" : props.points < 3 ? "#c0c0c0" : props.points < 4 ? "gold" : ""};
-    ${props => props.rarity == 4 ?
+    border: 3px solid ${props => props.rarity == 1 ? "black" : props.points == 2 ? "#cd7f32" : props.points == 3 ? "#c0c0c0" : props.points == 4 ? "gold" : ""};
+    ${props => props.rarity == 5 ?
         `border-top: 3px solid cyan;
          border-left: 3px solid red;
          border-bottom: 3px solid gold;
@@ -522,7 +522,7 @@ export const ListUsersCrown = styled.img`
     height: 125px;
     width: 125px;
     position: absolute;
-    margin-bottom:150px;
+    margin-bottom:200px;
 `;
 
 export const ListUsersPicture = styled.img`

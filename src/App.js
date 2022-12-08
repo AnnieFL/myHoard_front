@@ -14,6 +14,8 @@ import Category from './screens/category';
 import Categories from './screens/categories';
 import YourHoard from './screens/yourHoard';
 import Gob from './screens/gob';
+import NonExist from './screens/nonExist';
+import Submissions from './admin/screens/submissions';
 
 export default function App() {
   return (
@@ -33,6 +35,9 @@ export default function App() {
       <Route path="/addThing" element={<AddThing />} />
 
       <Route path="/admin/addCategory" element={<AddCategory />} />
+      <Route path="/admin/submissions" element={<Submissions />} />
+
+      <Route path="*" element={<NonExist />} />
     </Routes>
   );
 }

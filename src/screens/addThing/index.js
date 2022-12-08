@@ -70,7 +70,7 @@ export default function AddThing(props) {
               [
                 { type: "text", value: name, onChange: (value) => setName(value), placeholder: "Name" },
                 { type: "number", value: size, onChange: (value) => setSize(value), placeholder: "Size (metric)" },
-                { type: "date", value: age, onChange: (value) => setAge(value), placeholder: "Age (in months)" },
+                { type: "date", value: age, onChange: (value) => setAge(value), placeholder: "Since:" },
                 { type: "select", value: category, options: categoriesOptions, onChange: (value) => setCategory(value), placeholder: "Category" },
                 { type: "file", accept: "image/png, image/jpeg", onChange: (files) => setPicture(files), placeholder: "Proof in picture" }
               ]

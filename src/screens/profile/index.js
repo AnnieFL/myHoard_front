@@ -1,15 +1,18 @@
 import Header from "../../components/header";
-import { Page, Content, MainContent, ContentMain, ProfileInfo, ProfileInfoPicture, ProfileInfoName, ProfileInfoItems, DemiLink, IconLink, ProfileInfoTitle, ProfileCategoriesTitle, ProfileCategories, ProfileCategoriesRow, ProfileCategoriesItem, ProfileCategoriesItemImage, NonLink } from "../../styled";
+import { Page, Content, MainContent, ContentMain, ProfileInfo, ProfileInfoPicture, ProfileInfoName, ProfileInfoItems, DemiLink, IconLink, ProfileInfoTitle, ProfileCategoriesTitle, ProfileCategories, ProfileCategoriesRow, ProfileCategoriesItem, ProfileCategoriesItemImage, NonLink, PostReport } from "../../styled";
 import { useEffect, useState } from "react";
 import Server from "../../classes/Server";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLogout } from "../../store/reducer";
 import { selectLogin } from "../../store/reducer";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Sidenav from "../../components/sidebar";
 import Loading from "../../components/loading";
 
 export default function Profile() {
   const login = useSelector(selectLogin);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const params = useParams();
 
   const [user, setUser] = useState();
@@ -32,6 +35,13 @@ export default function Profile() {
     }
   }, [])
 
+  const deleteUser = async () => {
+    await Server.baseDelete(`user/delete/${login.id}`, login.token);
+
+    dispatch(setLogout());
+    navigate("/");
+  }
+
   return (
     <Page>
       <Header profile/>
@@ -51,7 +61,12 @@ export default function Profile() {
                   <ProfileInfoPicture points={points ? points : 0} src={user.picture} />
                   <ProfileInfoName> - {user.name}<ProfileInfoTitle>{user.admin ? "[admin]" : ""}</ProfileInfoTitle> ({points ? points : 0} points)<IconLink>
                     {(!params.id || params.id == login.id) &&
+                    <>
                       <DemiLink to={"/profile/edit"}>🖊️</DemiLink>
+                      <span style={{color: "red", marginLeft: "350px", fontSize: "2em"}}>
+                        <DemiLink onClick={() => deleteUser()}>X</DemiLink>
+                        </span>
+                    </>
                     }
                   </IconLink></ProfileInfoName>
                 </ProfileInfo>

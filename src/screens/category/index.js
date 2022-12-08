@@ -15,11 +15,11 @@ export default function Categories() {
   const [loading, setLoading] = useState(true);
 
   const rarityOptions = [
-    { value: 0, name: "Common" },
-    { value: 1, name: "Normal" },
-    { value: 2, name: "Rare" },
-    { value: 3, name: "Legendary" },
-    { value: 4, name: "God-like" },
+    { value: 1, name: "Common" },
+    { value: 2, name: "Normal" },
+    { value: 3, name: "Rare" },
+    { value: 4, name: "Legendary" },
+    { value: 5, name: "God-like" },
   ]
 
   useEffect(() => {
