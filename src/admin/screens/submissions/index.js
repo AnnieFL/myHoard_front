@@ -1,5 +1,5 @@
 import Header from "../../../components/header";
-import { Page, Content, MainContent, NonLink, CategoryThingsTitle, CategoryThingsRow, CategoryThingsItem, CategoryThingsImage, CategoryThings } from "../../../styled";
+import { Page, Content, MainContent, NonLink, CategoryThingsTitle, CategoryThingsRow, CategoryThingsItem, CategoryThingsImage, CategoryThings, AcceptSubmission, DenySubmission } from "../../../styled";
 import { useEffect, useState } from "react";
 import Server from "../../../classes/Server";
 import { useSelector } from "react-redux";
@@ -60,8 +60,8 @@ export default function Submissions() {
                   {things[0] && things.map((thing, thingIndex) => (
                     <NonLink key={thingIndex}>
                       <CategoryThingsItem>
-                      <div title={"reject submission"} onClick={() => denyItem(thing.id)} style={{position: "absolute", marginBottom: "120px", marginLeft: "120px"}}>X</div>
-                      <div title={"accept submission"} onClick={() => approveItem(thing.id)} style={{position: "absolute", marginBottom: "120px", marginRight: "120px"}}>O</div>
+                        <AcceptSubmission title={"accept submission"} onClick={() => approveItem(thing.id)}>O</AcceptSubmission>
+                        <DenySubmission title={"reject submission"} onClick={() => denyItem(thing.id)}>X</DenySubmission>
                         <CategoryThingsImage title={`${thing.name}\nCategory: ${thing.category.name}`} src={thing.picture} />
                       </CategoryThingsItem>
                     </NonLink>

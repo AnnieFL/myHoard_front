@@ -8,6 +8,7 @@ import { selectLogin } from "../../store/reducer";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Sidenav from "../../components/sidebar";
 import Loading from "../../components/loading";
+import { images } from "../../config/constants";
 
 export default function Profile() {
   const login = useSelector(selectLogin);
@@ -24,7 +25,7 @@ export default function Profile() {
   useEffect(() => {
     if (!points && !things && !categories[0]) {
       (async () => {
-        const info = await Server.baseGet(`user/info/${params.id && params.id != login.id ? params.id : login.id}`, login.token)
+        const info = await Server.baseGet(`user/info/${params.id && params.id !== login.id ? params.id : login.id}`, login.token)
 
         setUser(info.user)
         setPoints(info.score);
@@ -44,7 +45,7 @@ export default function Profile() {
 
   return (
     <Page>
-      <Header profile/>
+      <Header profile />
       {!login.id &&
         <Navigate to={"/"} />
       }
@@ -61,12 +62,12 @@ export default function Profile() {
                   <ProfileInfoPicture points={points ? points : 0} src={user.picture} />
                   <ProfileInfoName> - {user.name}<ProfileInfoTitle>{user.admin ? "[admin]" : ""}</ProfileInfoTitle> ({points ? points : 0} points)<IconLink>
                     {(!params.id || params.id == login.id) &&
-                    <>
-                      <DemiLink to={"/profile/edit"}>🖊️</DemiLink>
-                      <span style={{color: "red", marginLeft: "350px", fontSize: "2em"}}>
-                        <DemiLink onClick={() => deleteUser()}>X</DemiLink>
+                      <>
+                        <DemiLink to={"/profile/edit"}>🖊️</DemiLink>
+                        <span style={{ color: "red", marginLeft: "350px", fontSize: "2em" }}>
+                          <DemiLink onClick={() => deleteUser()}>X</DemiLink>
                         </span>
-                    </>
+                      </>
                     }
                   </IconLink></ProfileInfoName>
                 </ProfileInfo>
@@ -80,20 +81,36 @@ export default function Profile() {
               <ProfileCategories>
                 <ProfileCategoriesTitle>Categories</ProfileCategoriesTitle>
                 <ProfileCategoriesRow>
-                  {categories[0] && categories.map((category, categoryIndex) => (
-                    <NonLink to={`/category/${category.id}`} key={categoryIndex}>
-                      <ProfileCategoriesItem rarity={category.rarity}>
-                        <ProfileCategoriesItemImage src={category.picture} />
-                      </ProfileCategoriesItem>
-                    </NonLink>
-                  ))}
-                  {(!params.id || params.id == login.id) &&
-                  <NonLink to={"/addThing"}>
-                    <ProfileCategoriesItem>
-                      <ProfileCategoriesItemImage src={"/images/plusSign.png"} />
-                    </ProfileCategoriesItem>
-                  </NonLink>
+                  {(!params.id || params.id === login.id) &&
+                    <>
+                      {categories[0] && categories.map((category, categoryIndex) => (
+                        <NonLink to={`/category/${category.id}`} key={categoryIndex}>
+                          <ProfileCategoriesItem rarity={category.rarity}>
+                            <ProfileCategoriesItemImage src={category.picture} />
+                          </ProfileCategoriesItem>
+                        </NonLink>
+                      ))}
+
+                      <NonLink to={"/addThing"}>
+                        <ProfileCategoriesItem>
+                          <ProfileCategoriesItemImage src={images.plusSign} />
+                        </ProfileCategoriesItem>
+                      </NonLink>
+                    </>
                   }
+
+                  {params.id && params.id !== login.id &&
+                    <>
+                      {things[0] && things.map((thing, thingIndex) => (
+                        <NonLink to={`/thing/${thing.id}`} key={thingIndex}>
+                          <ProfileCategoriesItem>
+                            <ProfileCategoriesItemImage src={thing.picture} />
+                          </ProfileCategoriesItem>
+                        </NonLink>
+                      ))}
+                    </>
+                  }
+
                 </ProfileCategoriesRow>
               </ProfileCategories>
             </>

@@ -7,6 +7,7 @@ import { selectLogin } from "../../store/reducer";
 import { Navigate, useParams } from "react-router-dom";
 import Sidenav from "../../components/sidebar";
 import Loading from "../../components/loading";
+import { images } from "../../config/constants";
 
 export default function Categories() {
   const login = useSelector(selectLogin);
@@ -70,7 +71,7 @@ export default function Categories() {
                     ))}
                     <NonLink to={"/addThing"} state={{ category: category.id }}>
                       <CategoryThingsItem>
-                        <CategoryThingsImage src={"/images/plusSign.png"} />
+                        <CategoryThingsImage src={images.plusSign} />
                       </CategoryThingsItem>
                     </NonLink>
                   </CategoryThingsRow>

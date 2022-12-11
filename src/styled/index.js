@@ -386,7 +386,7 @@ export const ProfileCategoriesItem = styled.div`
          border-left: 3px solid red;
          border-bottom: 3px solid gold;
          border-right: 3px solid green;`
-    : ""};
+        : ""};
     font-size: 2em;
     border-radius: 15px;
     cursor: pointer;
@@ -539,5 +539,35 @@ export const ListUsersName = styled.span`
     border-bottom-left-radius: 25px;
     font-size: 0.9em;
     color: ${colors.background};
+`;
+//
+
+//Submissions  
+export const AcceptSubmission = styled.div`
+    position: absolute; 
+    margin-bottom: 120px; 
+    margin-right: 120px;
+`;
+
+export const DenySubmission = styled.div`
+    position: absolute; 
+    margin-bottom: 120px; 
+    margin-left: 120px;
+`;
+//
+
+//Loading
+export const LoadingPage = styled.div`
+    width: 100%; 
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const LoadingImage = styled.img`
+    width: 25vw;
+    height: 25vw;
 `;
 //

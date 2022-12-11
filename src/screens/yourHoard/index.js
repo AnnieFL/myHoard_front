@@ -7,6 +7,7 @@ import { selectLogin } from "../../store/reducer";
 import { Navigate } from "react-router-dom";
 import Sidenav from "../../components/sidebar";
 import Loading from "../../components/loading";
+import { images } from "../../config/constants";
 
 export default function YourHoard() {
   const login = useSelector(selectLogin);
@@ -49,7 +50,7 @@ export default function YourHoard() {
                   ))}
                   <NonLink to={"/addThing"}>
                     <CategoryThingsItem>
-                      <CategoryThingsImage src={"/images/plusSign.png"} />
+                      <CategoryThingsImage src={images.plusSign} />
                     </CategoryThingsItem>
                   </NonLink>
                 </CategoryThingsRow>

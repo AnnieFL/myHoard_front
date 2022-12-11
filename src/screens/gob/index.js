@@ -7,6 +7,7 @@ import { selectLogin } from "../../store/reducer";
 import { Navigate } from "react-router-dom";
 import Sidenav from "../../components/sidebar";
 import Loading from "../../components/loading";
+import { images } from "../../config/constants";
 
 export default function Gob() {
   const login = useSelector(selectLogin);
@@ -42,7 +43,7 @@ export default function Gob() {
                   <NonLink to={`/profile/${user.id == login.id ? "" : user.id}`} key={userIndex}>
                     <ListUsersItem>
                       {user.admin &&
-                        <ListUsersCrown title="admin" src={"/images/crown.png"}/>
+                        <ListUsersCrown title="admin" src={images.crown}/>
                       }
                       <ListUsersPicture src={user.picture} />
                       <ListUsersName>{user.name}</ListUsersName>

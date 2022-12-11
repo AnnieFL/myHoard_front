@@ -8,4 +8,11 @@ export const colors = {
     }
 };
 
+export const images = {
+    loading: "/images/loading.png",
+    backArrow: "/images/backArrow.png",
+    plusSign: "/images/plusSign.png",
+    crown: "/images/crown.png"
+}
+
 export const DB_URL = process.env.REACT_APP_DB_URL;
