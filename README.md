@@ -1,5 +1,5 @@
 
-## 🖋️WORK IN PROGRESS🖋️
+## 🖋️SCHOOL PROJECT🖋️
 
 # My Hoard
 
